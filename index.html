@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>ABCD Engineering Classes - Coming Soon</title>
+<link rel="stylesheet" href="css/style.min.css" type="text/css" media="screen">
+<script src="https://code.jquery.com/jquery-2.2.3.min.js" integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="js/jquery.tipsy.min.js"></script>
+</head>
+<body>
+	<div id="wrapper">
+		<header>
+			<a class="logo" href="index.html"><img src="images/logo.png" alt="logo" title="logo" /></a>
+		</header>
+		<div id="book">
+			<div id="ribbon" class="contact">click me to reveal the contact form</div>
+			<div class="top-page"></div>
+			<div class="content-page">
+				<div class="top-spiral"></div>
+				<div class="bottom-spiral"></div>
+				<div id="cform">
+					<div class="row"></div>
+					<h3>Get in touch with us:</h3>
+					<div class="form-wrapper in-touch">
+						<div id="message"></div>
+						<form method="post" name="contactform" id="contactform">
+							<input type="text" name="name" placeholder="Name" id="name" />
+							<input type="text" name="email" placeholder="Email" id="email" />
+							<input type="text" name="phone" placeholder="Phone" id="phone" />
+							<input type="text" name="subject" placeholder="Subject" id="subject" />
+              <input type="hidden" name="_subject" value="New contact form submission from abcdengg.in">
+							<textarea placeholder="Message" name="comments" id="comments"></textarea>
+							<div id="captcha">
+								<span>3+1=</span>
+								<input type="text" name="verify" id="verify" />
+							</div><!--end verify-->
+							<input type="submit" name="send" value="SEND" id="submit" class="blue" />
+						</form>
+					</div><!--end form-wrapper-->
+				</div><!--end cform-->
+				<div id="home">
+					<div class="row"></div>
+					<h2>We're currently under construction!</h2>
+					<div class="row"></div>
+					<div class="row"></div>
+					<h3>We`re working hard and believe we`ll launch the website soon:</h3>
+					<div class="row"></div>
+					<div class="form-wrapper email-list">
+						<div id="mesaj"></div>
+						<form id="subscribe" method="post" name="subscribe">
+							<input type="text" id="semail" name="Email" placeholder="Subscribe to our email list">
+              <input type="hidden" name="_subject" value="New subscription from abcdengg.in">
+							<input type="submit" id="ssubmit" name="subscribe" value="SUBSCRIBE" class="blue">
+						</form>
+					</div><!--end form-wrapper-->
+				</div><!--end home-->
+			</div><!--end content-page-->
+			<div class="bottom-page">
+				<ul class="social">
+					<li><a class="facebook tooltip" href="#" title="Facebook"></a></li>
+					<li><a class="twitter tooltip" href="#" title="Twitter"></a></li>
+					<li><a class="youtube tooltip" href="#" title="YouTube"></a></li>
+					<li><a class="skype tooltip" href="#" title="Skype"></a></li>
+				</ul>
+			</div><!--end bottom-page-->
+		</div><!--end book-->
+		<p class="copyright">Copyright &copy; ABCD Engineering Classes - All Rights Reserved</p>
+	</div><!--end wrapper-->
+  <script>
+  $(document).ready(function() {
+  	$('.tooltip').tipsy({
+  		fade: true,
+  		gravity: 's'
+  	});
+  	$(".contact").click(function(){contact()});
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    $("#subscribe").submit(function(e) {
+    	e.preventDefault();
+      if(re.test($("#semail").val())) {
+        $.ajax({
+      		url: '//formspree.io/gauravmakhecha@gmail.com',
+      		method: 'POST',
+      		data: $(this).serialize(),
+      		dataType: 'json',
+      		beforeSend: function() {
+      			$('#mesaj').hide();
+            $('#ssubmit').after('<img src="images/ajax-loader.gif" class="subscribe-loader" alt="loading">').attr('disabled','disabled');
+      		},
+      		success: function(data) {
+            $('#mesaj').html('<fieldset><div id="success_page"><h1>Email Sent Successfully.</h1><p>Thank you! We will contact you once we`ll launch the website!</p></div></fieldset>');
+      			$('#mesaj').slideDown('slow');
+            $('#subscribe').slideUp('slow');
+      		},
+      		error: function(err) {
+      			$('#mesaj').html('<div class="error_message">An error occurred. Please try again.</div>');
+            $('#mesaj').slideDown('slow');
+            $('#subscribe img.subscribe-loader').fadeOut('slow',function(){$(this).remove()});
+            $('#ssubmit').removeAttr('disabled');
+      		}
+      	});
+      } else {
+        $('#mesaj').html('<div class="error_message">Attention! Please enter a valid email address.</div>');
+        $('#mesaj').slideDown('slow');
+      }
+    });
+    $("#contactform").submit(function(e) {
+      e.preventDefault();
+      if (!$.trim($("#name").val())) {
+        setContactFormError('You must enter your name');
+      } else if (!re.test($("#email").val())) {
+        setContactFormError('Please enter a valid email address');
+      } else if (!$.trim($("#phone").val())) {
+        setContactFormError('Please enter a valid phone number');
+      } else if (!$.trim($("#subject").val())) {
+        setContactFormError('Please enter a subject');
+      } else if (!$.trim($("#comments").val())) {
+        setContactFormError('Please enter your message');
+      } else if (!$.trim($("#verify").val()) || $("#verify").val() != 4) {
+        setContactFormError('The verification number you entered is incorrect');
+      } else {
+        $.ajax({
+          url: '//formspree.io/gauravmakhecha@gmail.com',
+          method: 'POST',
+          data: $(this).serialize(),
+          dataType: 'json',
+          beforeSend: function() {
+            $('#message').hide();
+            $('#submit').after('<img src="images/ajax-loader.gif" class="loader" alt="loading">').attr('disabled','disabled');
+          },
+          success: function(data) {
+            $('#message').html('<fieldset><div id="success_page"><h1>Email Sent Successfully.</h1><p>Thank you <strong>' + $("#name").val() + '</strong>, your message has been submitted to us.</p></div></fieldset>');
+            $('#message').slideDown('slow');
+            $('#contactform').slideUp('slow');
+          },
+          error: function(err) {
+            setContactFormError('An error occurred. Please try again');
+            $('#contactform img.loader').fadeOut('slow',function(){$(this).remove()});
+            $('#submit').removeAttr('disabled');
+          }
+        });
+      }
+    });
+  });
+  function setContactFormError(message) {
+    $('#message').html('<div class="error_message">Attention! ' + message + '.</div>');
+    $('#message').slideDown('slow');
+  }
+  function contact() {
+    if ($("#cform").is(":hidden"))
+    {
+      $("#ribbon").css({"background":"url(images/ribbon.png) bottom left no-repeat"});
+      $("#home").slideUp("fast");
+      $("#cform").slideDown("slow");
+    }
+    else{
+      $("#ribbon").css({"background":"url(images/ribbon.png) top left no-repeat"});
+      $("#cform").slideUp("slow");
+      $("#home").slideDown("slow");
+    }
+  }
+  </script>
+</body>
+</html>
