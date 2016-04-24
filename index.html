@@ -32,7 +32,7 @@
 							<textarea placeholder="Message" name="comments" id="comments"></textarea>
 							<div id="captcha">
 								<span>3+1=</span>
-								<input type="text" name="verify" id="verify" />
+								<input type="text" id="verify" />
 							</div><!--end verify-->
 							<input type="submit" name="send" value="SEND" id="submit" class="blue" />
 						</form>
@@ -40,8 +40,9 @@
 				</div><!--end cform-->
 				<div id="home">
 					<div class="row"></div>
-					<h2>We're currently under construction!</h2>
-					<div class="row"></div>
+          <h2>A Complete Solution for Engineering Study</h2>
+          <div class="row"></div>
+					<h3>We're currently under construction!</h3>
 					<div class="row"></div>
 					<h3>We`re working hard and believe we`ll launch the website soon:</h3>
 					<div class="row"></div>
@@ -53,14 +54,18 @@
 							<input type="submit" id="ssubmit" name="subscribe" value="SUBSCRIBE" class="blue">
 						</form>
 					</div><!--end form-wrapper-->
+          <br>
+          <h3>Degree &amp; Diploma Engineering</h3>
+          <h3>All Branches All Subjects</h3>
+          <h3>Project Guidance</h3>
+          <div class="row"></div>
+          <h2>Contact : +91 94089 37159</h2>
 				</div><!--end home-->
 			</div><!--end content-page-->
 			<div class="bottom-page">
 				<ul class="social">
-					<li><a class="facebook tooltip" href="#" title="Facebook"></a></li>
-					<li><a class="twitter tooltip" href="#" title="Twitter"></a></li>
-					<li><a class="youtube tooltip" href="#" title="YouTube"></a></li>
-					<li><a class="skype tooltip" href="#" title="Skype"></a></li>
+					<li><a class="facebook tooltip" href="https://www.facebook.com/anybodycandoengg/" target="_blank" title="Facebook"></a></li>
+					<li><a class="twitter tooltip" href="https://twitter.com/abcdengg" target="_blank" title="Twitter"></a></li>
 				</ul>
 			</div><!--end bottom-page-->
 		</div><!--end book-->
@@ -78,7 +83,7 @@
     	e.preventDefault();
       if(re.test($("#semail").val())) {
         $.ajax({
-      		url: '//formspree.io/gauravmakhecha@gmail.com',
+      		url: '//formspree.io/anybodycandoengg@gmail.com',
       		method: 'POST',
       		data: $(this).serialize(),
       		dataType: 'json',
@@ -119,7 +124,7 @@
         setContactFormError('The verification number you entered is incorrect');
       } else {
         $.ajax({
-          url: '//formspree.io/gauravmakhecha@gmail.com',
+          url: '//formspree.io/anybodycandoengg@gmail.com',
           method: 'POST',
           data: $(this).serialize(),
           dataType: 'json',
